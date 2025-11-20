@@ -1,0 +1,36 @@
+"""
+URL configuration for role_system project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from accounts import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    
+    # Auth Paths
+    path('', views.login_view, name='login'),
+    path('signup/', views.signup_view, name='signup'),
+    path('logout/', views.logout_view, name='logout'),
+    
+    # Dashboard Paths
+    path('dashboard/admin/', views.admin_dashboard, name='admin_dashboard'),
+    path('dashboard/customer/', views.customer_dashboard, name='customer_dashboard'),
+    
+    # CRUD Paths
+    path('delete/<int:user_id>/', views.delete_user, name='delete_user'),
+    path('update/<int:user_id>/', views.update_user, name='update_user'),
+]
